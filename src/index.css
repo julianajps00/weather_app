@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden;
+  font-family: "Inter", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+h1 {
+  font-size: 70px;
+}
+h2 {
+  font-size: 30px;
+}
+
+.sky-day {
+  @apply bg-gradient-to-b from-sky-300 to-sky-50;
+}
+
+.sky-night {
+  @apply bg-gradient-to-b from-sky-700 to-sky-950;
+}
+
+.background {
+  @apply bg-gradient-to-b from-blue-100/70 to-blue-50/70;
+}
+
+.dark .background {
+  @apply bg-gradient-to-b from-slate-950 to-slate-950;
+}
+
+.horizontal-scroll {
+  overflow: auto;
+  scrollbar-width: none;
+}
+
+.horizontal-scroll::-webkit-scrollbar {
+  display: none;
+}
