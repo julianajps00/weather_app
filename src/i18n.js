@@ -10,6 +10,7 @@ i18n
       en: { translation: require("./locales/en/translation.json") },
       pt: { translation: require("./locales/pt/translation.json") }
     },
+    lng: 'en',
     fallbackLng: "en",
     detection: {
       order: ["localStorage", "navigator", "htmlTag"],
