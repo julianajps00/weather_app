@@ -1,6 +1,6 @@
 import { getCurrentLang } from "../utils/Language";
 
-const API_KEY = "9f5cb161f4b193daf8f29c2ae49266bb";
+const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
 const BASE_URL = "https://api.openweathermap.org";
 
 export async function getWeatherByZIP(city) {
