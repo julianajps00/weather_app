@@ -6,10 +6,15 @@ body {
   margin: 0;
   padding: 0;
   width: 100%;
+  color: oklch(29.3% 0.066 243.157);
   overflow-x: hidden;
   font-family: "Inter", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.dark body {
+  color: white;
 }
 
 code {
@@ -20,6 +25,7 @@ code {
 h1 {
   font-size: 70px;
 }
+
 h2 {
   font-size: 30px;
 }
@@ -37,7 +43,17 @@ h2 {
 }
 
 .dark .background {
-  @apply bg-gradient-to-b from-slate-950 to-slate-950;
+  @apply bg-gradient-to-b from-sky-950 to-sky-950;
+}
+
+.background-selected {
+  @apply bg-gradient-to-b from-blue-300/80 to-blue-200/80;
+  /* @apply bg-gradient-to-b from-blue-200/80 to-blue-100/80 ; */
+}
+
+.dark .background-selected {
+  @apply bg-gradient-to-b from-slate-900 to-slate-800;
+  /* @apply bg-gradient-to-b from-slate-900/90 to-slate-850/90; */
 }
 
 .horizontal-scroll {

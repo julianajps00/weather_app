@@ -1,0 +1,16 @@
+{
+    "now": "Now",
+    "feels_like": "Feels like",
+    "wind": "Wind",
+    "humidity": "Humidity",
+    "chance_of_rain": "Chance of rain",
+    "next_few_hours": "Next few hours",
+    "next_few_days": "Next few days",
+    "7days": "7 days",
+    "back": "Back",
+    "city_or_zipcode": "City or zip code",
+    "use_current_location": "Use current location",
+    "recents": "Recents",
+    "city_not_found": "City not found",
+    "not_found_description": "To make it more precise put the city's name, comma, 2-letter country code (ISO3166). You will get all proper cities in chosen country. The order is important - the first is city name then comma then country.\nExample: London, GB or New York, US."
+}

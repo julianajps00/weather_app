@@ -1,15 +1,16 @@
 import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
+import "../i18n";
 
 import { BsGeoAlt, BsCursorFill } from "react-icons/bs";
 
-import ToogleTheme from "./ToogleTheme";
 import { getWeatherByGeocoding, getWeatherByZIP, getWeatherByLatLon } from "../services/weatherApi";
 
-export default function SearchInput({ onSearch }) {
+export default function SearchInput({ onSearch, search, changeSearch }) {
     const [openSearch, setOpenSearch] = useState(false);
-    const [search, setSearch] = useState("London, GB");
-    const [searchSuggested, setSearchSuggested] = useState([]);
+    const [searchSuggested, changeSearchSuggested] = useState([]);
     const [recent, setRecent] = useState([]);
+    const { t } = useTranslation();
 
     useEffect(() => {
         const saved = JSON.parse(localStorage.getItem("recentSearches")) || [];
@@ -23,15 +24,15 @@ export default function SearchInput({ onSearch }) {
             if (/^\d/.test(data)) {
                 data = await getWeatherByZIP(data);
                 updatedRecentSearch(data);
-                setSearch(data.name + ', ' + data.sys.country);
+                changeSearch(data.name + ', ' + data.sys.country);
                 setOpenSearch(false);
                 onSearch?.(data);
             } else {
                 data = await getWeatherByGeocoding(data);
-                setSearchSuggested(data);
+                changeSearchSuggested(data);
             }
-        } catch (error) {
-            alert(error.message);
+        } catch (err) {
+            onSearch?.(null);
         }
     };
 
@@ -41,8 +42,8 @@ export default function SearchInput({ onSearch }) {
         const data = await getWeatherByLatLon(latitude, longitude);
 
         updatedRecentSearch(data);
-        setSearchSuggested([]);
-        setSearch(data.name + ', ' + data.sys.country);
+        changeSearchSuggested([]);
+        changeSearch(data.name + ', ' + data.sys.country);
         setOpenSearch(false);
         onSearch?.(data);
     };
@@ -68,12 +69,12 @@ export default function SearchInput({ onSearch }) {
     };
 
     return (
-        <div className="relative w-full flex md:flex-row-reverse gap-2 items-center justify-between">
+        <div className="relative w-full flex gap-2 items-center justify-between">
             <form className="w-full" onSubmit={(e) => {
                 e.preventDefault();
                 handleCityByGeocoding();
             }}>
-                <div className="w-full md:w-auto peer flex items-center pl-3 bg-transparent text-base sm:text-sm/6 text-black border border-transparent rounded-full focus:outline-none focus:ring-2 focus:ring-sky-500 dark:focus:ring-sky-400">
+                <div className="w-full md:w-auto peer flex items-center pl-3 bg-transparent text-sm border border-transparent rounded-full focus:outline-none focus:ring-2 focus:ring-sky-500 dark:focus:ring-sky-400">
                     <div className="shrink-0 select-none mr-2">
                         <BsGeoAlt />
                     </div>
@@ -82,33 +83,35 @@ export default function SearchInput({ onSearch }) {
                         value={search}
                         onFocus={() => setOpenSearch(true)}
                         onBlur={() => setOpenSearch(false)}
-                        onChange={(e) => setSearch(e.target.value)}
-                        placeholder="City or Zip Code"
-                        className="w-full md:w-[300px] md:max-w-full block min-w-0 grow py-1.5 pr-3 pl-1 bg-transparent text-base placeholder:text-gray-400 focus:outline-none"
+                        onChange={(e) => changeSearch(e.target.value)}
+                        placeholder={t("city_or_zipcode")}
+                        className="w-full block min-w-0 grow py-1.5 pr-3 pl-1 bg-transparent placeholder:text-gray-400 focus:outline-none"
                     />
                 </div>
-                {openSearch && (<div className="z-20 absolute top-full w-full md:w-[300px] bg-white border rounded shadow block">
-                    <div className="p-3 hover:bg-gray-100 cursor-pointer"
+                {openSearch && (<div className="z-20 absolute top-full w-full bg-white dark:bg-slate-900 dark:text-white rounded overflow-hidden shadow block">
+                    <div className="p-3 hover:bg-blue-50 hover:dark:bg-slate-700 cursor-pointer"
                         onMouseDown={(e) => {
                             e.preventDefault();
                             handleSearchByCurrentLocation(e);
                         }}>
                         <div className="flex gap-2 items-center">
                             <BsCursorFill />
-                            <span className="text-sm">Use current location</span>
+                            <span className="text-sm">{t("use_current_location")}</span>
                         </div>
                     </div>
-                    {recent.length > 0 && !search?.trim() && (
+                    {recent.length > 0 && searchSuggested.length === 0 && (
                         <div>
-                            <div className="px-3 py-2 border-b-1">
-                                Recent
+                            <div className="text-xs flex items-center">
+                                <div className="w-full border-t border-blue-50 dark:border-slate-700"></div>
+                                <p className="w-min px-4">{t("recents")}</p>
+                                <div className="w-full border-t border-blue-50 dark:border-slate-700"></div>
                             </div>
                             {recent.map((item, i) => (
                                 <div
                                     key={i}
-                                    className="z-10 p-3 text-sm hover:bg-gray-100 cursor-pointer"
+                                    className="z-10 p-3 text-sm hover:bg-blue-50 hover:dark:bg-slate-700 cursor-pointer"
                                     onMouseDown={(e) => {
-                                        setSearch(item.name + ', ' + (item.country || item.sys?.country));
+                                        changeSearch(item.name + ', ' + (item.country || item.sys?.country));
                                         setOpenSearch(false);
                                         onSearch?.(item);
                                     }}
@@ -123,7 +126,7 @@ export default function SearchInput({ onSearch }) {
                             {searchSuggested.map((item, i) => (
                                 <div type="button"
                                     key={i}
-                                    className="relative z-50 p-3 text-sm hover:bg-gray-100 cursor-pointer"
+                                    className="relative z-50 p-3 text-sm hover:bg-blue-50 hover:dark:bg-slate-700 cursor-pointer"
                                     onMouseDown={(e) => {
                                         e.preventDefault();
                                         handleSearch(e, item.lat, item.lon);
@@ -136,7 +139,6 @@ export default function SearchInput({ onSearch }) {
                     )}
                 </div>)}
             </form>
-            <ToogleTheme />
         </div>
     );
 }

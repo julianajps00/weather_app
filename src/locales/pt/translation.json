@@ -1,0 +1,16 @@
+{
+    "now": "Agora",
+    "feels_like": "Sensação térmica",
+    "wind": "Vento",
+    "humidity": "Humidade",
+    "chance_of_rain": "Chuva",
+    "next_few_hours": "Nas próximas horas",
+    "next_few_days": "Nos próximos dias",
+    "7days": "7 dias",
+    "back": "Voltar",
+    "city_or_zipcode": "Cidade ou código-postal",
+    "use_current_location": "Usar localização atual",
+    "recents": "Recentes",
+    "city_not_found": "Cidade não encontrada",
+    "not_found_description": "Para ser mais preciso, coloque o nome da cidade, seguido de uma vírgula e do código do país com 2 letras (ISO3166). Assim, obterá todas as cidades corretas do país escolhido. A ordem é importante: primeiro o nome da cidade, depois a vírgula e, por último, o país.\nExemplo: London, GB ou New York, US."
+}
