@@ -44,7 +44,7 @@ function App() {
   return (
     <div className="App w-full h-full min-h-screen">
       <Header />
-      <main className={`w-full min-h-[calc(100svh_-_36px)] h-[calc(100svh_-_36px)] md:h-full flex ${isMdUp ? `sky-${timeOfDay}` : `bg-none`} md:p-5 md:items-center md:justify-center`}>
+      <main className={`w-full min-h-[calc(100svh_-_36px)] h-full flex ${isMdUp ? `sky-${timeOfDay}` : `bg-none`} md:p-5 md:items-center md:justify-center`}>
         {firstLoading && (!search || !weather) ?
           <></>
           :
