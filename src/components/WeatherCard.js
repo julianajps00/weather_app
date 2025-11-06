@@ -1,4 +1,5 @@
 
+import { useEffect, useState } from "react";
 import { BsCalendar3, BsWind, BsDroplet, BsCloudRain, BsThermometerHigh, BsArrowUp, BsArrowDown } from "react-icons/bs";
 import { useTranslation } from "react-i18next";
 import "../i18n";

@@ -16,7 +16,7 @@ export default function HourlyForecast({ weather, onChangeWeather, openDailyFore
 
     useEffect(() => {
         if (weather && !weather.min) getHourlyForecastByLatLon();
-    }, [weather, i18n.language]);
+    }, [weather?.coord?.lat, weather?.coord?.lon, i18n.language]);
 
     const getHourlyForecastByLatLon = async () => {
         const data = await getForecastByLatLon(weather.coord.lat, weather.coord.lon);
@@ -49,10 +49,6 @@ export default function HourlyForecast({ weather, onChangeWeather, openDailyFore
             const weatherItem =
                 items.find(i => i.dt_txt.includes("12:00:00")) || items[Math.floor(items.length / 2)];
 
-            if (date === todayStr && (!weather.pop || weather.pop !== Math.round(avgPop * 100))) {
-                weather.pop = Math.round(avgPop * 100);
-            }
-
             return {
                 ...weather,
                 date,
@@ -63,7 +59,16 @@ export default function HourlyForecast({ weather, onChangeWeather, openDailyFore
                 pop: Math.round(avgPop * 100)
             };
         });
-        if (weather.pop) onChangeWeather(weather);
+        const todayForecast = dailyForecast.find((d) => d.date === todayStr);
+        const newPop = todayForecast ? todayForecast.pop : weather?.pop;
+
+        if (newPop && newPop !== weather?.pop) {
+            onChangeWeather((prev) => ({
+                ...prev,
+                pop: newPop,
+            }));
+        }
+
         setDailyForecast(dailyForecast);
     };
 
