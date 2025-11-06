@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
-import { BsSearch } from "react-icons/bs";
+import { BsSearch, BsArrowUp, BsArrowDown } from "react-icons/bs";
 
 import { getForecastByLatLon } from "../services/weatherApi";
 
@@ -80,7 +80,7 @@ export default function HourlyForecast({ weather, onChangeWeather, openDailyFore
     }
 
     return (
-        <div className={`forecast-card transition-all duration-500 min-h-fit md:h-full ${openDailyForecast ? 'h-[45vh]' : 'h-[200px]'}`}>
+        <div className={`forecast-card`}>
             {weather ? (
                 <div className="flex flex-col gap-3 p-6">
                     {(!openDailyForecast || isMdUp) && (
@@ -93,7 +93,7 @@ export default function HourlyForecast({ weather, onChangeWeather, openDailyFore
                                 {weatherToday.map((item, i) => (
                                     <div
                                         key={i}
-                                        className={`px-3 py-2 flex flex-col border border-gray-300 dark:border-gray-600 rounded-[.5rem] ${isMdUp ? `background` : `bg-none`} md:border-0`}
+                                        className={`px-3 py-2 flex flex-col justify-center items-center border border-gray-300 dark:border-gray-600 rounded-[.5rem] ${isMdUp ? `background` : `bg-none`} md:border-0`}
                                     >
                                         <div className="text-center text-sm dark:text-white">{item.hour}</div>
                                         <img
@@ -130,9 +130,9 @@ export default function HourlyForecast({ weather, onChangeWeather, openDailyFore
                                         />
                                         <p className="text-start text-xs text-gray-600">{item.weatherItem.weather[0].description}</p>
                                     </div>
-                                    <div className="min-w-24 flex gap-2 justify-end">
-                                        <p className="font-bold dark:text-white">↑{Math.round(item.max)}°</p>
-                                        <p className="text-gray-600">↓{Math.round(item.min)}°</p>
+                                    <div className="min-w-24 flex gap-1 justify-end">
+                                        <p className="flex items-center font-bold dark:text-white"><BsArrowUp />{Math.round(item.max)}°</p>
+                                        <p className="flex items-center text-gray-600"><BsArrowDown />{Math.round(item.min)}°</p>
                                     </div>
                                 </div>
                             ))}
@@ -152,9 +152,9 @@ export default function HourlyForecast({ weather, onChangeWeather, openDailyFore
                                             className={`w-12 max-w-full filter hue-rotate-40 saturate-150 brightness-110`}
                                         />
                                     </div>
-                                    <div className="flex justify-center gap-2 text-xs">
-                                        <p className="font-bold dark:text-white">↑{Math.round(item.max)}°</p>
-                                        <p className="text-gray-600">↓{Math.round(item.min)}°</p>
+                                    <div className="flex justify-center gap-1 text-xs">
+                                        <p className="flex items-center font-bold dark:text-white"><BsArrowUp />{Math.round(item.max)}°</p>
+                                        <p className="flex items-center text-gray-600"><BsArrowDown />{Math.round(item.min)}°</p>
                                     </div>
                                 </div>
                             ))}

@@ -1,5 +1,5 @@
 
-import { BsCalendar3, BsWind, BsDroplet, BsCloudRain, BsThermometerHigh } from "react-icons/bs";
+import { BsCalendar3, BsWind, BsDroplet, BsCloudRain, BsThermometerHigh, BsArrowUp, BsArrowDown } from "react-icons/bs";
 import { useTranslation } from "react-i18next";
 import "../i18n";
 
@@ -11,42 +11,43 @@ export default function WeatherCard({ weather, openDailyForecast }) {
     const { t } = useTranslation();
 
     return (
-        <div className="weather-card h-[calc(100%_-_86px)]">
+        <div className="weather-card h-[calc(100%_-_66px)] md:h-[calc(100%_-_86px)]">
             {weather && (weather?.weather?.length > 0 || weather?.weatherItem?.weather?.length > 0) && (
-                <div className="h-full px-6 pb-8">
+                <div className={`h-full px-6 ${openDailyForecast ? 'pb-4' : 'pb-8'}`}>
                     <div className="h-full flex flex-col justify-between divide-y divide-gray-300 md:divide-y-0 md:divide-gray-0">
                         <div className="h-full flex items-center justify-center gap-3">
-                            <div className="flex flex-col gap-3 items-center">
-                                <p className="flex gap-2 text-sm items-center">{!weather.min ? t("now") : <><BsCalendar3 />{formatDate(weather.date)}</>}</p>
-                                <motion.div
-                                    layout
-                                    transition={{ duration: 0.5, ease: "easeInOut" }}
-                                    className={`flex md:flex-row-reverse md:items-start md:justify-center ${!openDailyForecast ? 'flex-col items-center' : 'flex-row-reverse'
-                                        }`}
-                                >
-                                    <motion.img
+                            <div className={`flex gap-3 items-center ${openDailyForecast ? 'w-full flex-row justify-between' : 'flex-col'}`}>
+                                <div className="flex flex-col">
+                                    <p className={`flex gap-2 text-sm items-center ${openDailyForecast ? 'justify-start' : 'justify-center'}`}>{!weather.min ? t("now") : <><BsCalendar3 />{formatDate(weather.date)}</>}</p>
+                                    <motion.div
                                         layout
                                         transition={{ duration: 0.5, ease: "easeInOut" }}
-                                        src={!weather.min ? `https://openweathermap.org/img/wn/${weather.weather[0].icon}@4x.png` : `https://openweathermap.org/img/wn/${weather.weatherItem.weather[0].icon}@4x.png`}
-                                        alt={!weather.min ? weather.weather[0].description : weather.weatherItem.weather[0].description}
-                                        className={`filter hue-rotate-40 saturate-150 brightness-110 md:w-24 ${!openDailyForecast ? "w-60 max-w-[90%] -mt-5 -mb-10" : "w-28"
-                                            }`}
-                                    />
-                                    {!weather.min && <motion.h1 layout className="font-bold">{Math.round(weather.main.temp)}°</motion.h1>}
-                                </motion.div>
-                                <div className="flex flex-col md:hidden">
-                                    <h2 className={`capitalize transition-all duration-500 ease-in-out ${openDailyForecast ? "text-xl" : ""}`}>
-                                        {weather.weather[0].description}
-                                    </h2>
-                                    <p className="hidden md:flex">{t("feels_like")} {Math.round(weather.main.feels_like)}°</p>
+                                        className={`flex md:flex-row-reverse md:items-start md:justify-center flex-row-reverse`}>
+                                        <motion.img
+                                            layout
+                                            transition={{ duration: 0.5, ease: "easeInOut" }}
+                                            src={!weather.min ? `https://openweathermap.org/img/wn/${weather.weather[0].icon}@4x.png` : `https://openweathermap.org/img/wn/${weather.weatherItem.weather[0].icon}@4x.png`}
+                                            alt={!weather.min ? weather.weather[0].description : weather.weatherItem.weather[0].description}
+                                            className={`filter hue-rotate-40 saturate-150 brightness-110 md:w-24 ${openDailyForecast ? 'w-20' : 'w-24'}`}
+                                        />
+                                        {!weather.min && <motion.h1 layout className={`font-bold ${openDailyForecast ? 'text-[60px]' : ''}`}>{Math.round(weather.main.temp)}°</motion.h1>}
+                                    </motion.div>
                                 </div>
-                                <div className="flex gap-1 mb-4">
-                                    <p className="text-md font-bold">↑{Math.round(weather.main.temp_max)}°</p>
-                                    <p className="text-md">↓{Math.round(weather.main.temp_min)}°</p>
+                                <div className={`flex flex-col gap-1 ${openDailyForecast ? 'items-end' : ''}`}>
+                                    <div className="flex flex-col gap-1 justify-end md:hidden">
+                                        <h2 className={`capitalize transition-all duration-500 ease-in-out ${openDailyForecast ? 'text-base' : 'text-xl'}`}>
+                                            {weather.weather[0].description}
+                                        </h2>
+                                        <p className={`flex ${openDailyForecast ? 'justify-end' : 'justify-center'}`}>{t("feels_like")} {Math.round(weather.main.feels_like)}°</p>
+                                    </div>
+                                    <div className={`flex gap-1 justify-center ${openDailyForecast ? '' : 'mb-4'}`}>
+                                        <p className="flex items-center text-md font-bold"><BsArrowUp />{Math.round(weather.main.temp_max)}°</p>
+                                        <p className="flex items-center text-md"><BsArrowDown />{Math.round(weather.main.temp_min)}°</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div className="w-full h-auto pt-8 flex gap-2 items-center md:flex-col md:gap-4">
+                        <div className={`w-full h-auto flex gap-2 items-center md:flex-col md:gap-4  ${openDailyForecast ? 'hidden pt-4' : 'pt-8'}`}>
                             <p className="hidden md:flex w-full text-sm text-start font-bold capitalize">{weather.weather[0].description}</p>
                             <div className="hidden md:flex-row gap-1 items-center">
                                 <BsThermometerHigh className="w-6 md:w-4 h-auto md:mr-1" />
