@@ -56,7 +56,7 @@ export default function WeatherCard({ weather, openDailyForecast }) {
                             </div>
                             <div className="w-full flex flex-col md:flex-row gap-1 items-center">
                                 <BsWind className="w-6 md:w-4 h-auto md:mr-1" />
-                                <p className="hidden md:block text-sm text-start">{t("humidity")}: <span className="font-bold">{Math.round(weather.wind.speed * 3.6)} hm/h</span></p>
+                                <p className="hidden md:block text-sm text-start">{t("wind")}: <span className="font-bold">{Math.round(weather.wind.speed * 3.6)} hm/h</span></p>
                                 <p className="block md:hidden text-sm font-bold">{Math.round(weather.wind.speed * 3.6)} hm/h</p>
                                 <p className="flex md:hidden text-sm text-gray-600">{t("wind")}</p>
                             </div>
