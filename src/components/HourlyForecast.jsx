@@ -92,7 +92,7 @@ export default function HourlyForecast({ weather, onChangeWeather, openDailyFore
                         <>
                             <div className="flex gap-2 justify-between">
                                 <p className="flex text-sm font-bold dark:text-white">{!weather.date || formatDate(weather.date) === formatDate(new Date()) ? t("next_few_hours") : formatDate(weather.date)}</p>
-                                <p className="flex text-sm text-gray-600 cursor-pointer hover:font-bold md:hidden" onClick={() => onChangeDailyForecast(!openDailyForecast)}>{t("7days")} &gt;</p>
+                                <p className="flex text-sm text-gray-600 night:text-gray-400 cursor-pointer hover:font-bold md:hidden" onClick={() => onChangeDailyForecast(!openDailyForecast)}>{t("7days")} &gt;</p>
                             </div>
                             <div className="flex md:grid grid-cols-8 gap-2 horizontal-scroll">
                                 {weatherToday.map((item, i) => (
@@ -117,7 +117,7 @@ export default function HourlyForecast({ weather, onChangeWeather, openDailyFore
                     {(openDailyForecast || isMdUp) && (<>
                         <div className="flex gap-2 justify-between md:mt-6">
                             <p className="hidden md:flex text-sm font-bold dark:text-white">{t("next_few_days")}</p>
-                            <p className="flex text-sm text-gray-600 cursor-pointer hover:font-bold md:hidden" onClick={() => onChangeDailyForecast(!openDailyForecast)}>&lt; {t("back")}</p>
+                            <p className="flex text-sm text-gray-600 night:text-gray-400 cursor-pointer hover:font-bold md:hidden" onClick={() => onChangeDailyForecast(!openDailyForecast)}>&lt; {t("back")}</p>
                         </div>
                         <div className="flex flex-col md:hidden">
                             {dailyForecast.map((item, i) => (
@@ -133,11 +133,11 @@ export default function HourlyForecast({ weather, onChangeWeather, openDailyFore
                                             alt={item.weatherItem.weather[0].description}
                                             className={`w-10 max-w-full filter hue-rotate-40 saturate-150 brightness-110`}
                                         />
-                                        <p className="text-start text-xs text-gray-600">{item.weatherItem.weather[0].description}</p>
+                                        <p className="text-start text-xs text-gray-600 night:text-gray-400">{item.weatherItem.weather[0].description}</p>
                                     </div>
                                     <div className="min-w-24 flex gap-1 justify-end">
                                         <p className="flex items-center font-bold dark:text-white"><BsArrowUp />{Math.round(item.max)}°</p>
-                                        <p className="flex items-center text-gray-600"><BsArrowDown />{Math.round(item.min)}°</p>
+                                        <p className="flex items-center text-gray-600 night:text-gray-400"><BsArrowDown />{Math.round(item.min)}°</p>
                                     </div>
                                 </div>
                             ))}
@@ -159,7 +159,7 @@ export default function HourlyForecast({ weather, onChangeWeather, openDailyFore
                                     </div>
                                     <div className="flex justify-center gap-1 text-xs">
                                         <p className="flex items-center font-bold dark:text-white"><BsArrowUp />{Math.round(item.max)}°</p>
-                                        <p className="flex items-center text-gray-600"><BsArrowDown />{Math.round(item.min)}°</p>
+                                        <p className="flex items-center text-gray-600 night:text-gray-400"><BsArrowDown />{Math.round(item.min)}°</p>
                                     </div>
                                 </div>
                             ))}
@@ -171,7 +171,7 @@ export default function HourlyForecast({ weather, onChangeWeather, openDailyFore
                 (
                     <div className="w-full h-full p-5 flex flex-col gap-2 items-start justify-center">
                         <p className="text-start flex gap-1 items-center"><BsSearch /> {t("city_not_found")}</p>
-                        <p className="text-start text-xs text-gray-600 dark:text-gray-300 whitespace-pre-line">{t("not_found_description")}</p>
+                        <p className="text-start text-xs text-gray-600 night:text-gray-400 dark:text-gray-300 whitespace-pre-line">{t("not_found_description")}</p>
                     </div>
                 )
             }

@@ -69,7 +69,7 @@ export default function SearchInput({ onSearch, search, changeSearch }) {
     };
 
     return (
-        <div className="relative w-full flex gap-2 items-center justify-between">
+        <div className="city-search dark:text-sky-950 md:dark:text-white night:text-white md:night:text-sky-950 md:night:dark:text-white relative w-full flex gap-2 items-center justify-between">
             <form aria-label="search-form" className="w-full" onSubmit={(e) => {
                 e.preventDefault();
                 handleCityByGeocoding();
@@ -88,7 +88,7 @@ export default function SearchInput({ onSearch, search, changeSearch }) {
                         className="w-full block min-w-0 grow py-1.5 pr-3 pl-1 bg-transparent placeholder:text-gray-400 focus:outline-none"
                     />
                 </div>
-                {openSearch && (<div className="z-20 absolute top-full w-full bg-white dark:bg-slate-900 dark:text-white rounded overflow-hidden shadow block">
+                {openSearch && (<div className="z-20 absolute top-full w-full bg-white dark:bg-slate-900 dark:text-white night:dark:text-white night:text-sky-950 rounded overflow-hidden shadow block">
                     <div className="p-3 hover:bg-blue-50 hover:dark:bg-slate-700 cursor-pointer"
                         onMouseDown={(e) => {
                             e.preventDefault();

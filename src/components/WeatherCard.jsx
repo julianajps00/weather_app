@@ -12,7 +12,7 @@ export default function WeatherCard({ weather, openDailyForecast }) {
     const { t } = useTranslation();
 
     return (
-        <div className="weather-card h-[calc(100%_-_66px)] md:h-[calc(100%_-_86px)]">
+        <div className="weather-card night:text-white dark:text-sky-950 md:night:text-sky-950 md:dark:text-white md:night:dark:text-white h-[calc(100%_-_66px)] md:h-[calc(100%_-_86px)]">
             {weather && (weather?.weather?.length > 0 || weather?.weatherItem?.weather?.length > 0) && (
                 <div className={`h-full px-6 ${openDailyForecast ? 'pb-4' : 'pb-8'}`}>
                     <div className="h-full flex flex-col justify-between divide-y divide-gray-300 md:divide-y-0 md:divide-gray-0">
@@ -58,19 +58,19 @@ export default function WeatherCard({ weather, openDailyForecast }) {
                                 <BsWind className="w-6 md:w-4 h-auto md:mr-1" />
                                 <p className="hidden md:block text-sm text-start">{t("wind")}: <span className="font-bold">{Math.round(weather.wind.speed * 3.6)} hm/h</span></p>
                                 <p className="block md:hidden text-sm font-bold">{Math.round(weather.wind.speed * 3.6)} hm/h</p>
-                                <p className="flex md:hidden text-sm text-gray-600">{t("wind")}</p>
+                                <p className="flex md:hidden text-sm text-gray-600 night:text-gray-400">{t("wind")}</p>
                             </div>
                             <div className="w-full flex flex-col md:flex-row gap-1 items-center">
                                 <BsDroplet className="w-6 md:w-4 h-auto md:mr-1" />
                                 <p className="hidden md:block text-sm text-start">{t("humidity")}: <span className="font-bold">{weather.main.humidity}%</span></p>
                                 <p className="block md:hidden text-sm font-bold">{weather.main.humidity}%</p>
-                                <p className="flex md:hidden text-sm text-gray-600">{t("humidity")}</p>
+                                <p className="flex md:hidden text-sm text-gray-600 night:text-gray-400">{t("humidity")}</p>
                             </div>
                             <div className="w-full flex flex-col md:flex-row gap-1 items-center">
                                 <BsCloudRain className="w-6 md:w-4 h-auto md:mr-1" />
                                 <p className="hidden md:block text-sm text-start">{t("chance_of_rain")}: <span className="font-bold">{Number(weather.pop) || 0}%</span></p>
                                 <p className="block md:hidden text-sm font-bold">{Number(weather.pop) || 0}%</p>
-                                <p className="flex md:hidden text-sm text-gray-600">{t("chance_of_rain")}</p>
+                                <p className="flex md:hidden text-sm text-gray-600 night:text-gray-400">{t("chance_of_rain")}</p>
                             </div>
                         </div>
                     </div>
