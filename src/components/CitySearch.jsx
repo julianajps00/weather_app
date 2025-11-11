@@ -70,7 +70,7 @@ export default function SearchInput({ onSearch, search, changeSearch }) {
 
     return (
         <div className="relative w-full flex gap-2 items-center justify-between">
-            <form className="w-full" onSubmit={(e) => {
+            <form aria-label="search-form" className="w-full" onSubmit={(e) => {
                 e.preventDefault();
                 handleCityByGeocoding();
             }}>

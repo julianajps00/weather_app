@@ -38,8 +38,10 @@ Uma aplicação web simples e responsiva desenvolvida com **React** e **Tailwind
 
 ![Screenshot da aplicação](./src/assets/screenshot.png)  
 ![Screenshot da aplicação dark](./src/assets/screenshot_dark.png)  
-![Screenshot da aplicação mobile](./src/assets/screenshot_mobile.png) 
-![Screenshot da aplicação mobile dark](./src/assets/screenshot_mobile_dark.png) 
+<p align="center">
+  <img src="./src/assets/screenshot_mobile.png" width="50%" />
+  <img src="./src/assets/screenshot_mobile_dark.png" width="50%" />
+</p>
 
 ---
 
@@ -47,5 +49,5 @@ Uma aplicação web simples e responsiva desenvolvida com **React** e **Tailwind
 
 ```bash
 npm install
-npm start
+npm run dev
 npm run build

@@ -3,10 +3,10 @@ import { useTranslation } from "react-i18next";
 
 import './App.css';
 
-import Header from "./components/Header";
-import CitySearch from "./components/CitySearch";
-import WeatherCard from "./components/WeatherCard";
-import HourlyForecast from "./components/HourlyForecast";
+import Header from "./components/Header.jsx";
+import CitySearch from "./components/CitySearch.jsx";
+import WeatherCard from "./components/WeatherCard.jsx";
+import HourlyForecast from "./components/HourlyForecast.jsx";
 import useDayNight from "./hooks/useDayNight";
 
 import { getWeatherByZIP, getWeatherByLatLon } from "./services/weatherApi";
